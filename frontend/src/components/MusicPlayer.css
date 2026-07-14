@@ -65,7 +65,7 @@
     margin-left: 4px;
 }
 
-/* Playlist dropdown */
+/* Playlist dropdown - gestion via classe .open (ou style inline) */
 .playlist-dropdown {
     position: relative;
     display: inline-block;
@@ -89,6 +89,7 @@
     color: #00ffea;
 }
 
+/* Le contenu de la playlist est masqué par défaut */
 .playlist-content {
     display: none;
     position: absolute;
@@ -105,10 +106,18 @@
     box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
-.playlist-dropdown:hover .playlist-content {
+/* Lorsque la playlist est ouverte (classe .open ajoutée par JS) */
+.playlist-content.open {
     display: block;
 }
 
+/* Optionnel : on garde le support du hover pour les ordinateurs (mais le clic prévaut) */
+/* On peut commenter ou supprimer la règle ci-dessous si on préfère le clic uniquement */
+/* .playlist-dropdown:hover .playlist-content {
+    display: block;
+} */
+
+/* Éléments de la playlist */
 .playlist-item {
     padding: 8px 12px;
     font-size: 0.7rem;

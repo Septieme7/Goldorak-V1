@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './MusicPlayer.css';
 
-// Liste des musiques (à adapter selon mes fichiers "noms")
 const tracks = [
     { name: "Générique Goldorak", src: "/musiques/goldorak-generique.mp3" },
     { name: "Actarus, déploie-toi !", src: "/musiques/actarus-deploie-toi.mp3" },
@@ -12,12 +11,13 @@ const tracks = [
 function MusicPlayer() {
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaylistOpen, setIsPlaylistOpen] = useState(false);
     const audioRef = useRef(null);
 
     // Lecture automatique quand on change de piste si la lecture était active
     useEffect(() => {
         if (isPlaying && audioRef.current) {
-            audioRef.current.play().catch(err => console.log("Lecture auto bloquée par navigateur", err));
+            audioRef.current.play().catch(err => console.log("Lecture auto bloquée", err));
         }
     }, [currentTrackIndex]);
 
@@ -52,7 +52,19 @@ function MusicPlayer() {
         if (index === currentTrackIndex && isPlaying) return;
         setCurrentTrackIndex(index);
         setIsPlaying(true);
+        setIsPlaylistOpen(false); // ferme le menu après sélection
     };
+
+    // Fermer le menu quand on clique en dehors
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (isPlaylistOpen && !e.target.closest('.playlist-dropdown')) {
+                setIsPlaylistOpen(false);
+            }
+        };
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [isPlaylistOpen]);
 
     return (
         <div className="goldorak-music-player">
@@ -69,20 +81,31 @@ function MusicPlayer() {
                 <button className="player-btn" onClick={handleNext} title="Piste suivante">⏭</button>
                 <div className="track-name">{tracks[currentTrackIndex].name}</div>
             </div>
+
             <div className="playlist-dropdown">
-                <button className="playlist-toggle">📀 Playlist</button>
-                <div className="playlist-content">
-                    {tracks.map((track, idx) => (
-                        <div
-                            key={idx}
-                            className={`playlist-item ${idx === currentTrackIndex ? 'active' : ''}`}
-                            onClick={() => handleSelectTrack(idx)}
-                        >
-                            <span className="playlist-icon">{idx === currentTrackIndex && isPlaying ? "🔊" : "🎵"}</span>
-                            {track.name}
-                        </div>
-                    ))}
-                </div>
+                <button 
+                    className="playlist-toggle" 
+                    onClick={() => setIsPlaylistOpen(!isPlaylistOpen)}
+                    title="Ouvrir la playlist"
+                >
+                    📀 Playlist
+                </button>
+                {isPlaylistOpen && (
+                    <div className="playlist-content" style={{ display: 'block' }}>
+                        {tracks.map((track, idx) => (
+                            <div
+                                key={idx}
+                                className={`playlist-item ${idx === currentTrackIndex ? 'active' : ''}`}
+                                onClick={() => handleSelectTrack(idx)}
+                            >
+                                <span className="playlist-icon">
+                                    {idx === currentTrackIndex && isPlaying ? "🔊" : "🎵"}
+                                </span>
+                                {track.name}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

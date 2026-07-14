@@ -880,7 +880,7 @@ Il est exécuté automatiquement au premier démarrage du conteneur MySQL.
 --goldorak-silver: #b0b0b0   /* Argent métallique    */
 ```
 
-### 🎵 Lecteur musical intégré
+#### 🎵 Lecteur musical intégré
 
 Le projet intègre un **lecteur audio léger** aux couleurs de Goldorak, permettant d'écouter 4 titres emblématiques de la série pendant l'utilisation de l'interface.
 
@@ -891,7 +891,7 @@ Le projet intègre un **lecteur audio léger** aux couleurs de Goldorak, permett
 | Lecture / Pause | ▶️ / ⏸ | Joue ou met en pause la piste courante |
 | Piste précédente | ⏮ | Retour au titre précédent |
 | Piste suivante | ⏭ | Passe au titre suivant |
-| Playlist | 📀 | Menu déroulant pour sélectionner directement un morceau |
+| Playlist | 📀 | **Cliquez** pour ouvrir le menu déroulant et sélectionner directement un morceau |
 
 **Fichiers audio :**  
 Placez vos 4 fichiers `.mp3` dans le dossier `frontend/public/musiques/`.  
@@ -906,6 +906,7 @@ Noms attendus (ajustables dans `MusicPlayer.jsx`) :
 - Styles `MusicPlayer.css` – thème spatial (cyan, rouge, fonds transparents)
 - Position : en haut à droite de l'en‑tête principal
 - Volume : réglé à 50 % par défaut
+- **Playlist interactive** : ouverture/fermeture au clic, sélection directe d’un morceau, fermeture automatique après choix.
 
 ### Composants principaux
 
