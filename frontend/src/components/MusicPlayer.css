@@ -1,0 +1,157 @@
+/* Goldorak Music Player */
+.goldorak-music-player {
+    background: rgba(10, 20, 30, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid #00ccff55;
+    border-radius: 40px;
+    padding: 4px 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Orbitron', monospace;
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.player-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.player-btn {
+    background: rgba(0, 204, 255, 0.15);
+    border: none;
+    color: #00ccff;
+    font-size: 1.1rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.player-btn:hover {
+    background: rgba(0, 204, 255, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 0 6px #00ccff;
+}
+
+.play-pause {
+    background: linear-gradient(135deg, #ff3366, #cc0066);
+    color: white;
+    box-shadow: 0 0 4px #ff3366;
+}
+
+.play-pause:hover {
+    background: linear-gradient(135deg, #ff5588, #dd1177);
+    box-shadow: 0 0 8px #ff3366;
+}
+
+.track-name {
+    color: #e0e5ec;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: 1px solid #2a4c6e;
+    padding-left: 8px;
+    margin-left: 4px;
+}
+
+/* Playlist dropdown */
+.playlist-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.playlist-toggle {
+    background: rgba(0, 204, 255, 0.1);
+    border: 1px solid #2a4c6e;
+    color: #88ccff;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    font-family: 'Orbitron', monospace;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.playlist-toggle:hover {
+    background: rgba(0, 204, 255, 0.3);
+    border-color: #00ccff;
+    color: #00ffea;
+}
+
+.playlist-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(10, 20, 35, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid #00ccff55;
+    border-radius: 12px;
+    min-width: 200px;
+    z-index: 1000;
+    margin-top: 8px;
+    padding: 6px 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+.playlist-dropdown:hover .playlist-content {
+    display: block;
+}
+
+.playlist-item {
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    color: #cce2ff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+    border-left: 2px solid transparent;
+}
+
+.playlist-item:hover {
+    background: rgba(0, 204, 255, 0.1);
+    color: #00ffea;
+}
+
+.playlist-item.active {
+    background: rgba(0, 204, 255, 0.15);
+    border-left-color: #ff3366;
+    color: #00ffea;
+    font-weight: 600;
+}
+
+.playlist-icon {
+    font-size: 0.7rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .goldorak-music-player {
+        padding: 4px 8px;
+        gap: 6px;
+    }
+    .track-name {
+        max-width: 120px;
+        font-size: 0.65rem;
+    }
+    .player-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 0.9rem;
+    }
+}
