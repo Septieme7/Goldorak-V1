@@ -15,6 +15,9 @@ function Header() {
 
     if (!user) return null;
 
+    // Déterminer l'affichage du fournisseur
+    const providerDisplay = user.isGuest ? 'Invité' : `via ${user.provider}`;
+
     return (
         <header className="app-header">
             <div className="header-content">
@@ -33,9 +36,7 @@ function Header() {
                         )}
                         <div className="user-details">
                             <span className="user-name">{user.displayName}</span>
-                            <span className="user-provider">
-                                via {user.provider}
-                            </span>
+                            <span className="user-provider">{providerDisplay}</span>
                         </div>
                     </div>
 
