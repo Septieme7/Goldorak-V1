@@ -2,11 +2,17 @@
 
 # 🤖 Goldorak Database — Base de données complète de l'univers Goldorak
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-7.7.7-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
-![React](https://img.shields.io/badge/react-19.2.0-61dafb.svg)
+![React](https://img.shields.io/badge/react-19.2.0-61dafb.svg?logo=react)
 ![Docker](https://img.shields.io/badge/docker-ready-2496ED?logo=docker)
+![Express](https://img.shields.io/badge/Express-5.x-000000?logo=express)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)
+![Auth OAuth2](https://img.shields.io/badge/Auth-OAuth2-3b82f6?logo=oauth)
 ![License](https://img.shields.io/badge/license-ISC-yellow.svg)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
+
 
 Une application web full‑stack moderne pour gérer et explorer l'univers de Goldorak (UFO Robot Grendizer).  
 Cette base de données interactive permet de cataloguer et consulter tous les personnages, robots, vaisseaux, armes, épisodes et monstres de la série légendaire.
@@ -1261,27 +1267,6 @@ Pour toute question ou problème :
 
 *"Nous sommes tous des enfants des étoiles"*
 
-![Footer](https://img.shields.io/badge/Made%20with-React%20%26%20Express-blue?style=for-the-badge)
-![Footer](https://img.shields.io/badge/Database-MySQL-orange?style=for-the-badge)
-![Footer](https://img.shields.io/badge/Auth-OAuth2-green?style=for-the-badge)
-![Footer](https://img.shields.io/badge/Deploy-Docker-2496ED?style=for-the-badge&logo=docker)
-
 *📅 Dernière mise à jour : Juillet 2026 — Goldorak DB v7.7.7*
 
 </div>
-```
-
----
-
-## 📌 Récapitulatif des mises à jour
-
-| Section | Modifications apportées |
-|---------|------------------------|
-| **Fonctionnalités** | Ajout de la pagination configurable, recherche avec debounce, tooltips pour toutes les descriptions, sélecteurs de référence `ID X = Nom` |
-| **Sections principales** | Précision sur les listes déroulantes `ID X = Nom` pour pilotes, robots et épisodes |
-| **Architecture** | Mention des hooks `useReferenceData`, `useFormFields` et du composant `Modal` avec références |
-| **Interface utilisateur** | Ajout des sections : Barre de recherche, Tooltips améliorés, Pagination stylisée, Export CSV |
-| **API REST** | Précision sur les paramètres `page`, `limit`, `search` et la pagination |
-| **Divers** | Corrections mineures de typo et mise en forme |
-
-Tu peux copier/coller ce fichier dans ton projet. 🚀
