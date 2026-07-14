@@ -1,5 +1,5 @@
 // frontend/src/hooks/useFetchData.js
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { api } from '../api';
 
 const ENDPOINT_CONFIG = {
@@ -107,9 +107,11 @@ export function useFetchData(endpoint, initialLimit = 100) {
     const [total, setTotal] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
 
+    // Ref pour le debounce
+    const debounceTimeout = useRef(null);
+
     const config = ENDPOINT_CONFIG[endpoint];
 
-    // Calcul du nombre total de pages
     const totalPages = Math.max(1, Math.ceil(total / limit));
 
     const fetchData = useCallback(async () => {
@@ -122,16 +124,18 @@ export function useFetchData(endpoint, initialLimit = 100) {
         setLoading(true);
         setError(null);
         try {
+            // Ne lancer la recherche que si searchTerm a au moins 2 caractères
+            const effectiveSearch = searchTerm.length >= 2 ? searchTerm : '';
+
             const params = new URLSearchParams({
                 page: page,
                 limit: limit,
-                search: searchTerm
+                search: effectiveSearch
             }).toString();
 
             const result = await config.fetch(params);
             console.log(`📦 Données reçues pour ${endpoint}:`, result);
 
-            // Le résultat peut être un tableau (si handleResponse a extrait data) ou un objet avec data et pagination
             if (Array.isArray(result)) {
                 setData(result);
                 setTotal(result.length);
@@ -157,10 +161,41 @@ export function useFetchData(endpoint, initialLimit = 100) {
         }
     }, [endpoint, config, page, limit, searchTerm]);
 
-    // Déclencher le fetch à chaque changement de page, limite ou recherche
+    // Debounce pour la recherche : attendre 300ms après la dernière frappe
     useEffect(() => {
+        // Annuler le timeout précédent
+        if (debounceTimeout.current) {
+            clearTimeout(debounceTimeout.current);
+        }
+
+        // Ne pas lancer la recherche si moins de 2 caractères
+        if (searchTerm.length >= 2) {
+            debounceTimeout.current = setTimeout(() => {
+                fetchData();
+            }, 300);
+        } else {
+            // Si moins de 2 caractères, on recharge immédiatement sans filtre (mais on peut aussi ne rien faire)
+            // On peut aussi appeler fetchData() immédiatement pour vider les résultats
+            debounceTimeout.current = setTimeout(() => {
+                fetchData();
+            }, 100);
+        }
+
+        return () => {
+            if (debounceTimeout.current) {
+                clearTimeout(debounceTimeout.current);
+            }
+        };
+    }, [searchTerm, fetchData]);
+
+    // Recharger quand la page ou la limite change (sans debounce)
+    useEffect(() => {
+        // On annule le debounce pour ne pas faire double appel
+        if (debounceTimeout.current) {
+            clearTimeout(debounceTimeout.current);
+        }
         fetchData();
-    }, [fetchData]); // fetchData change quand page, limit ou searchTerm changent
+    }, [page, limit]);
 
     const handleView = (item) => {
         setSelectedItem(item);
@@ -227,7 +262,7 @@ export function useFetchData(endpoint, initialLimit = 100) {
 
     const setSearch = (term) => {
         setSearchTerm(term);
-        setPage(1);
+        // La recherche sera déclenchée par le debounce
     };
 
     return {
