@@ -346,8 +346,8 @@ Goldorak-DB-react-NodeJS-tailwind/
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/Septieme7/Goldorak-DB-react-NodeJS-tailwind.git
-cd Goldorak-DB-react-NodeJS-tailwind
+git clone https://github.com/Septieme7/Goldorak-V1.git
+cd Goldorak-V1.git
 
 # 2. Copier et configurer les variables d'environnement
 cp .env.example .env
@@ -756,12 +756,12 @@ La structure de données a été normalisée en troisième forme normale (3FN) p
 
 ```mermaid
 erDiagram
-    PERSONNAGE ||--o{ ROBOT : pilote
-    PERSONNAGE ||--o{ VAISSEAU : pilote
-    PERSONNAGE ||--o{ MONSTRE : combat
-    ROBOT ||--|{ ARME : possede
-    EPISODE ||--o{ MONSTRE : apparait_dans
-    EPISODE ||--o{ PERSONNAGE : apparait
+    PERSONNAGE ||--o{ ROBOT : "pilote"
+    PERSONNAGE ||--o{ VAISSEAU : "pilote"
+    PERSONNAGE ||--o{ MONSTRE : "combat"
+    ROBOT ||--|{ ARME : "possede"
+    EPISODE ||--o{ MONSTRE : "apparait_dans"
+    EPISODE ||--o{ PERSONNAGE : "apparait"
 
     PERSONNAGE {
         int id PK
@@ -771,7 +771,7 @@ erDiagram
         string role
         int age
         string planete_origine
-        text description
+        string description
     }
 
     ROBOT {
@@ -780,9 +780,9 @@ erDiagram
         string nom_jp
         int pilote_id FK
         string type_robot
-        decimal hauteur
-        decimal poids
-        text description
+        float hauteur
+        float poids
+        string description
     }
 
     VAISSEAU {
@@ -792,7 +792,7 @@ erDiagram
         string type_vaisseau
         int pilote_id FK
         string faction
-        text description
+        string description
     }
 
     ARME {
@@ -802,7 +802,7 @@ erDiagram
         int robot_id FK
         string puissance
         string frequence_utilisation
-        text description
+        string description
     }
 
     EPISODE {
@@ -811,9 +811,9 @@ erDiagram
         string titre_jp
         int numero_fr
         int numero_jp
-        date diffuse_jp
-        date diffuse_fr
-        text resume
+        datetime diffuse_jp
+        datetime diffuse_fr
+        string resume
     }
 
     MONSTRE {
@@ -822,9 +822,9 @@ erDiagram
         string nom_jp
         int episode_id FK
         string type_monstre
-        decimal taille
+        float taille
         string puissance
-        text description
+        string description
     }
 
     USERS {
@@ -834,8 +834,8 @@ erDiagram
         string email
         string display_name
         string avatar_url
-        timestamp created_at
-        timestamp last_login
+        datetime created_at
+        datetime last_login
     }
 ```
 
