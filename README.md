@@ -209,12 +209,12 @@ Goldorak-DB-react-NodeJS-tailwind/
 │
 ├── 📁 backend/                          # 🔌 Serveur Node.js + Express
 │   ├── 📁 config/                       # Configuration générale
-│   │   └── 🔐 passport.js              # Configuration OAuth2 (Google, GitHub)
+│   │   └── 🔐 passport.js               # Configuration OAuth2 (Google, GitHub)
 │   ├── 📁 database/                     # Schémas et données SQL
-│   │   └── 📊 users.sql                # Schéma table utilisateurs OAuth
+│   │   └── 📊 users.sql                 # Schéma table utilisateurs OAuth
 │   ├── 📁 middlewares/                  # Middlewares Express
-│   │   ├── 🛡️ authMiddleware.js        # Protection des routes (JWT verification)
-│   │   ├── 🗄️ dbMiddleware.js          # Injection de la connexion DB dans req
+│   │   ├── 🛡️ authMiddleware.js         # Protection des routes (JWT verification)
+│   │   ├── 🗄️ dbMiddleware.js           # Injection de la connexion DB dans req
 │   │   └── ✔️ validation.js             # Validation des données entrantes
 │   ├── 📁 routes/                       # Routes API REST (pagination + recherche)
 │   │   ├── 🔐 auth.js                   # Routes authentification OAuth2 + mode invité
